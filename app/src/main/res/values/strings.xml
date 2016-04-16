@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Pouch</string>
+    <string name="action_settings">Settings</string>
+    <string name="nfcFormattingErrorTitle">NFC Formatting Error Title</string>
+    <string name="nfcTagLostErrorTitle">NFC Tag Lost Error Title</string>
+    <string name="nfcWrittenTitle">NFC Written Title</string>
+    <string name="nfcWritten">NFC Written</string>
+    <string name="nfcTagLostError">NFC Tag Lost Error</string>
+    <string name="nfcFormattingError">NFC Formatting Error</string>
+    <string name="nfcNoNdefError">NFC No Node Error</string>
+    <string name="nfcNoNdefErrorTitle">NFC No Node Error Title</string>
+    <string name="nfcUnknownErrorTitle">NFC Unknown Error Title</string>
+    <string name="nfcUnknownError">NFC Unknown Error</string>
+    <string name="nfcBadSpaceErrorTitle">NFC BadSpace Error Title</string>
+    <string name="nfcBadSpaceError">NFC Bad Space Error</string>
+    <string name="nfcReadOnlyErrorTitle">NFC Read Only Error Title</string>
+    <string name="nfcReadOnlyError">NFC Read Only Error</string>
+</resources>

@@ -18,38 +18,80 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     NfcAdapter nfcAdapter;
-    boolean writeMode;
     Context context;
     IntentFilter tagDetected;
     PendingIntent pi;
+
+    NfcAdapter adapter;
+    PendingIntent pendingIntent;
+    IntentFilter writeTagFilters[];
+    boolean writeMode;
+    Tag mytag;
+    Context ctx;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        context=MainActivity.this;
-        String nfcMessage = "Abhishek";
+        ctx=this;
+
 
         // When an NFC tag comes into range, call the main activity which handles writing the data to the tag
-        nfcAdapter = NfcAdapter.getDefaultAdapter(context);
 
-        Intent nfcIntent = new Intent(context, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        nfcIntent.putExtra("nfcMessage", nfcMessage);
-        pi = PendingIntent.getActivity(context, 0, nfcIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
-        nfcAdapter.enableForegroundDispatch((Activity) context, pi, new IntentFilter[]{tagDetected}, null);
+        try {
+            if(mytag==null){
+                Toast.makeText(ctx, "error", Toast.LENGTH_LONG).show();
+            }else{
+                write("hello",mytag);
+                Toast.makeText(ctx, "waiting", Toast.LENGTH_LONG ).show();
+            }
+        } catch (IOException e) {
+            Toast.makeText(ctx, "waiting", Toast.LENGTH_LONG ).show();
+            e.printStackTrace();
+        } catch (FormatException e) {
+            Toast.makeText(ctx, "error", Toast.LENGTH_LONG ).show();
+            e.printStackTrace();
+        }
 
+        adapter = NfcAdapter.getDefaultAdapter(this);
+        pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
+        tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
+        writeTagFilters = new IntentFilter[] { tagDetected };
+
+    }
+
+    private NdefRecord createRecord(String text)
+            throws UnsupportedEncodingException {
+
+        //Intent intent = getIntent();
+        //EditText editTextWeb = (EditText)
+        Log.v("MyApp", "create Record started");
+        String nameVcard = "BEGIN:VCARD" +"\n"+ "VERSION:2.1" +"\n" + "N:;" + "Abhishek" + "\n" +"ORG: PlanAyala"+"\n"+ "TEL;HOME:6302421" +"\n"+ "END:VCARD";
+        byte[] uriField = nameVcard.getBytes(Charset.forName("US-ASCII"));
+        byte[] payload = new byte[uriField.length + 1];              //add 1 for the URI Prefix
+        //payload[0] = 0x01;                                      //prefixes http://www. to the URI
+        System.arraycopy(uriField, 0, payload, 1, uriField.length);  //appends URI to payload
+
+        NdefRecord nfcRecord = new NdefRecord(
+                NdefRecord.TNF_MIME_MEDIA, "text/vcard".getBytes(), new byte[0], payload);
+
+        return nfcRecord;
     }
 
     public NdefRecord createTextRecord(String payload, Locale locale, boolean encodeInUtf8) {
@@ -66,26 +108,44 @@ public class MainActivity extends AppCompatActivity {
                 NdefRecord.RTD_TEXT, new byte[0], data);
         return record;
     }
-    //@Override
-    public void onPause(){
-        super.onPause();
-        WriteModeOff();
-    }
 
-    @Override
-    public void onResume(){
-        super.onResume();
-        WriteModeOn();
-    }
+    private void write(String text, Tag tag) throws IOException, FormatException {
 
-    private void WriteModeOn(){
-        writeMode = true;
-        nfcAdapter.enableForegroundDispatch(this, pi,  new IntentFilter[]{tagDetected}, null);
-    }
+        NdefRecord[] records = { createRecord(text) };
+        Log.v("MyApp", "write Record started");
+        NdefMessage message = new NdefMessage(records);
+        Ndef ndef = Ndef.get(tag);
+        ndef.connect();
+        NdefFormatable formatable=NdefFormatable.get(mytag);
 
-    private void WriteModeOff(){
-        writeMode = false;
-        nfcAdapter.disableForegroundDispatch(this);
+        if (formatable != null) {
+            try {
+                formatable.connect();
+
+                try {
+                    formatable.format(message);
+                }
+                catch (Exception e) {
+                    // let the user know the tag refused to format
+                }
+            }
+            catch (Exception e) {
+                // let the user know the tag refused to connect
+            }
+            finally {
+                try {
+                    formatable.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        else {
+            // let the user know the tag cannot be formatted
+        }
+
+       // ndef.writeNdefMessage(message);
+        ndef.close();
     }
 
     @Override
@@ -95,14 +155,11 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void onNewIntent(Intent intent) {
-        // When an NFC tag is being written, call the write tag function when an intent is
-        // received that says the tag is within range of the device and ready to be written to
-        Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-        String nfcMessage = intent.getStringExtra("nfcMessage");
-
-        if(nfcMessage != null) {
-            writeTag(this, tag, nfcMessage);
+    @Override
+    protected void onNewIntent(Intent intent){
+        if(NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())){
+            mytag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+            Toast.makeText(this, "ok detecting" + mytag.toString(), Toast.LENGTH_LONG ).show();
         }
     }
 

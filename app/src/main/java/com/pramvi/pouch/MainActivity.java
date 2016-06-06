@@ -1,6 +1,5 @@
 package com.pramvi.pouch;
 
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -14,15 +13,14 @@ import android.nfc.TagLostException;
 import android.nfc.tech.Ndef;
 import android.nfc.tech.NdefFormatable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.pramvi.pouch.Utils.DialogUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -46,10 +44,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ctx=this;
-
 
         // When an NFC tag comes into range, call the main activity which handles writing the data to the tag
 
@@ -82,19 +80,24 @@ public class MainActivity extends AppCompatActivity {
         //Intent intent = getIntent();
         //EditText editTextWeb = (EditText)
         Log.v("MyApp", "create Record started");
-        String nameVcard = "BEGIN:VCARD" +"\n"+ "VERSION:2.1" +"\n" + "N:;" + "Abhishek" + "\n" +"ORG: PlanAyala"+"\n"+ "TEL;HOME:6302421" +"\n"+ "END:VCARD";
+
+        String nameVcard = "BEGIN:VCARD" +"\n"+ "VERSION:2.1" +"\n" + "N:;" + "Abhishek" + "\n" +
+                "ORG: PlanAyala"+"\n"+ "TEL;HOME:6302421" +"\n"+ "END:VCARD";
+
         byte[] uriField = nameVcard.getBytes(Charset.forName("US-ASCII"));
         byte[] payload = new byte[uriField.length + 1];              //add 1 for the URI Prefix
+
         //payload[0] = 0x01;                                      //prefixes http://www. to the URI
         System.arraycopy(uriField, 0, payload, 1, uriField.length);  //appends URI to payload
 
         NdefRecord nfcRecord = new NdefRecord(
                 NdefRecord.TNF_MIME_MEDIA, "text/vcard".getBytes(), new byte[0], payload);
-
         return nfcRecord;
     }
 
-    public NdefRecord createTextRecord(String payload, Locale locale, boolean encodeInUtf8) {
+    public NdefRecord createTextRecord(String payload, Locale locale, boolean encodeInUtf8)
+
+    {
         byte[] langBytes = locale.getLanguage().getBytes(Charset.forName("US-ASCII"));
         Charset utfEncoding = encodeInUtf8 ? Charset.forName("UTF-8") : Charset.forName("UTF-16");
         byte[] textBytes = payload.getBytes(utfEncoding);
@@ -177,7 +180,8 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    public static boolean writeTag(Context context, Tag tag, String data) {
+    public static boolean writeTag(Context context, Tag tag, String data)
+    {
         // Record to launch Play Store if app is not installed
         NdefRecord appRecord = NdefRecord.createApplicationRecord(context.getPackageName());
 

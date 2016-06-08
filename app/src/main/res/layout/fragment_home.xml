@@ -1,10 +1,15 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.pramvi.pouch.HomeFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <com.blunderer.materialdesignlibrary.views.CardView
         android:layout_width="match_parent"
@@ -18,4 +23,32 @@
         >
     </com.blunderer.materialdesignlibrary.views.CardView>
 
-</LinearLayout>
+    <com.blunderer.materialdesignlibrary.views.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:mdl_description="NFC Posters Coupon Code"
+        app:mdl_title="Promotion Posters"
+        app:mdl_normalButton="Format"
+        app:mdl_highlightButton="Edit"
+        app:mdl_imagePosition="top"
+        app:mdl_image="@drawable/coverphoto"
+        >
+    </com.blunderer.materialdesignlibrary.views.CardView>
+
+        <com.blunderer.materialdesignlibrary.views.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:mdl_description="NFC Posters Coupon Code"
+            app:mdl_title="Promotion Posters"
+            app:mdl_normalButton="Format"
+            app:mdl_highlightButton="Edit"
+            app:mdl_imagePosition="top"
+            app:mdl_image="@drawable/coverphoto"
+            >
+        </com.blunderer.materialdesignlibrary.views.CardView>
+
+    </LinearLayout>
+
+</ScrollView>

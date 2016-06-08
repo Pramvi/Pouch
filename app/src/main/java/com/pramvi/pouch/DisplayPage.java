@@ -73,8 +73,8 @@ public class DisplayPage extends AppCompatActivity
     private void setupViewPager(ViewPager viewPager) {
         TabsPagerAdapter adapter = new TabsPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new HomeFragment(),"Features");
-        adapter.addFrag(new HomeFragment(),"Profile");
-        adapter.addFrag(new HomeFragment(),"Histroy");
+        adapter.addFrag(new ProfileFragment(),"Profile");
+        adapter.addFrag(new ProfileFragment(),"Histroy");
         viewPager.setAdapter(adapter);
     }
 

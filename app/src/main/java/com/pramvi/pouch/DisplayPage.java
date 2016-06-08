@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.pramvi.pouch.Utils.TabsPagerAdapter;
+
 public class DisplayPage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -26,6 +28,7 @@ public class DisplayPage extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_page);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -35,15 +38,6 @@ public class DisplayPage extends AppCompatActivity
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -58,13 +52,29 @@ public class DisplayPage extends AppCompatActivity
     private void setupTabIcons()
     {
         TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-        tabOne.setText("Feeds");
+        tabOne.setText("Home");
         tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_menu_camera, 0, 0);
         tabLayout.getTabAt(0).setCustomView(tabOne);
+
+        TextView tabtwo = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
+        tabtwo.setText("Profile");
+        tabtwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_menu_send, 0, 0);
+        tabLayout.getTabAt(1).setCustomView(tabtwo);
+
+        TextView tabthree = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
+        tabthree.setText("Histroy");
+        tabthree.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_menu_gallery, 0, 0);
+        tabLayout.getTabAt(2).setCustomView(tabthree);
+
+
+
     }
 
     private void setupViewPager(ViewPager viewPager) {
         TabsPagerAdapter adapter = new TabsPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new HomeFragment(),"Features");
+        adapter.addFrag(new HomeFragment(),"Profile");
+        adapter.addFrag(new HomeFragment(),"Histroy");
         viewPager.setAdapter(adapter);
     }
 

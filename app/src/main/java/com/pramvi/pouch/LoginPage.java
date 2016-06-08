@@ -9,11 +9,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -21,6 +24,8 @@ public class LoginPage extends AppCompatActivity {
 
     LoginButton loginButton;
     CallbackManager callbackManager;
+    AccessTokenTracker accessTokenTracker;
+    AccessToken accessToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,8 +38,6 @@ public class LoginPage extends AppCompatActivity {
 
         Log.v("TAG",FacebookSdk.getApplicationSignature(getApplicationContext()));
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         loginButton = (LoginButton) findViewById(R.id.login_button);
         // If using in a fragment
@@ -45,6 +48,8 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // App code
+                Intent intent=new Intent(LoginPage.this,DisplayPage.class);
+                startActivity(intent);
                 Toast.makeText(LoginPage.this, "Login success", Toast.LENGTH_LONG).show();
             }
 
@@ -58,6 +63,14 @@ public class LoginPage extends AppCompatActivity {
                 // App code
             }
         });
+
+        accessTokenTracker=new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
+
+            }
+        };
+        accessToken=AccessToken.getCurrentAccessToken();
     }
 
     @Override

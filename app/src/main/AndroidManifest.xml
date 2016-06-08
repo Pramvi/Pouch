@@ -42,7 +42,10 @@
             android:name=".DisplayPage"
             android:label="@string/title_activity_display_page"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginPage" />
+
+        <activity android:name=".LoginPage"
+                    />
+
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"

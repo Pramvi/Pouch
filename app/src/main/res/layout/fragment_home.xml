@@ -1,13 +1,21 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.pramvi.pouch.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.blunderer.materialdesignlibrary.views.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        app:mdl_description="NFC Chip Contact Card"
+        app:mdl_title=" Bussiness Cards"
+        app:mdl_normalButton="Format"
+        app:mdl_highlightButton="Edit"
+        app:mdl_imagePosition="top"
+        app:mdl_image="@drawable/coverphoto"
+        >
+    </com.blunderer.materialdesignlibrary.views.CardView>
 
-</FrameLayout>
+</LinearLayout>

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.facebook.accountkit.AccessToken;
@@ -17,8 +18,12 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.accountkit.Account;
 import com.facebook.accountkit.AccountKit;
+import com.facebook.accountkit.AccountKitCallback;
+import com.facebook.accountkit.AccountKitError;
 import com.facebook.accountkit.AccountKitLoginResult;
+import com.facebook.accountkit.PhoneNumber;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
@@ -38,20 +43,28 @@ public class LoginPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
         FacebookSdk.sdkInitialize(this.getApplicationContext());
-        AppEventsLogger.activateApp(this);
-
         AccountKit.initialize(getApplicationContext());
-        com.facebook.accountkit.AccessToken accessToken = AccountKit.getCurrentAccessToken();
-
-        if (accessToken != null) {
-            //Handle Returning User
-        } else {
-            //Handle new or logged out user
-        }
+        AppEventsLogger.activateApp(this);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
+
+        com.facebook.accountkit.AccessToken accessToken = AccountKit.getCurrentAccessToken();
+
+        if (accessToken != null) {
+            AlreadyExistingUSers();
+        } else {
+            //Handle new or logged out user
+        }
+        Button accountKit=(Button)findViewById(R.id.loginaccountkit);
+        accountKit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onLoginPhone();
+            }
+        });
 
         Log.v("TAG",FacebookSdk.getApplicationSignature(getApplicationContext()));
 
@@ -65,9 +78,7 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // App code
-                Intent intent=new Intent(LoginPage.this,DisplayPage.class);
-                startActivity(intent);
-                Toast.makeText(LoginPage.this, "Login success", Toast.LENGTH_LONG).show();
+                loginSuccess();
             }
 
             @Override
@@ -110,7 +121,7 @@ public class LoginPage extends AppCompatActivity {
                 // and pass it to your server and exchange it for an access token.
 
                 // Success! Start your next activity...
-                //goToMyLoggedInActivity();
+                loginSuccess();
             }
 
             // Surface the result to your user in an appropriate way.
@@ -147,7 +158,7 @@ public class LoginPage extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onLoginPhone(final View view) {
+    public void onLoginPhone() {
         final Intent intent = new Intent(LoginPage.this, AccountKitActivity.class);
         AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder =
                 new AccountKitConfiguration.AccountKitConfigurationBuilder(
@@ -160,11 +171,34 @@ public class LoginPage extends AppCompatActivity {
         startActivityForResult(intent, APP_REQUEST_CODE);
     }
 
-    @Override
-    protected void onActivityResult(final int requestCode,
-            final int resultCode,
-            final Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void AlreadyExistingUSers()
+    {
+        AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
+            @Override
+            public void onSuccess(final Account account) {
+                // Get Account Kit ID
+                String accountKitId = account.getId();
 
+                // Get phone number
+                PhoneNumber phoneNumber = account.getPhoneNumber();
+                String phoneNumberString = phoneNumber.toString();
+
+                // Get email
+                String email = account.getEmail();
+            }
+
+            @Override
+            public void onError(final AccountKitError error) {
+                // Handle Error
+            }
+        });
     }
+
+    void loginSuccess()
+    {
+        Intent intent=new Intent(LoginPage.this,DisplayPage.class);
+        startActivity(intent);
+        Toast.makeText(LoginPage.this, "Login success", Toast.LENGTH_LONG).show();
+    }
+
 }

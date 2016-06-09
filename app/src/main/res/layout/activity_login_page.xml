@@ -18,5 +18,11 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/loginaccountkit"
+        android:text="account kit"
+        android:layout_below="@+id/login_button"/>
 
 </RelativeLayout>

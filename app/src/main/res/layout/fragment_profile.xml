@@ -2,7 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.pramvi.pouch.ProfileFragment">
+    tools:context="com.pramvi.pouch.ProfileFragment"
+    android:orientation="vertical"
+    android:background="@color/md_orange_100">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,14 +37,180 @@
 
 
         </RelativeLayout>
+        </LinearLayout>
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mobiletag"
+                android:text="Mobile Number :"
+                android:textSize="18dp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9643156229"
+                android:textSize="18dp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@+id/mobiletag"
+                />
+            </RelativeLayout>
         </android.support.v7.widget.CardView>
 
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/emailidtag"
+                android:text="EmailId :"
+                android:textSize="18dp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/emailid"
+                android:text="abhisinghania14@gmail.com"
+                android:textSize="18dp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@+id/emailidtag"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/companytag"
+                android:text="Company Name :"
+                android:textSize="18dp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/company"
+                android:text="None"
+                android:textSize="18dp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@+id/companytag"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/websitetag"
+                android:text="WebSite :"
+                android:textSize="18dp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="www.example.com"
+                android:textSize="18dp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@+id/websitetag"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/addresstag"
+                android:text="Address :"
+                android:textSize="18dp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vishesh Home Hostel,"
+                android:id="@+id/address"
+                android:textSize="18dp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@+id/addresstag"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.facebook.login.widget.LoginButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/loginforprofile"
+            android:layout_margin="10dp"
+            />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>

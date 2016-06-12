@@ -11,13 +11,38 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.pramvi.pouch.LoginPage">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp">
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textSize="30dp"
+        android:textColor="#454545"
+        android:layout_below="@+id/imgLogo"
+        android:gravity="center_horizontal"
+        android:text="Pramvi"
+        />
+
+    </RelativeLayout>
+
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="130dp"
         />
 
     <Button

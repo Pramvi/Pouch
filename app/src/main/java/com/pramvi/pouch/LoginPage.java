@@ -1,6 +1,7 @@
 package com.pramvi.pouch;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -8,9 +9,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.accountkit.AccessToken;
 
 import com.facebook.AccessTokenTracker;
@@ -32,9 +38,12 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import org.json.JSONObject;
+
 public class LoginPage extends AppCompatActivity {
 
     private static final int APP_REQUEST_CODE =1 ;
+    private static int SPLASH_TIME_OUT = 1000;
     LoginButton loginButton;
     CallbackManager callbackManager;
     AccessTokenTracker accessTokenTracker;
@@ -50,6 +59,20 @@ public class LoginPage extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
+
+        new Handler().postDelayed(new Runnable() {
+
+            /*
+             * Showing splash screen with a timer. This will be useful when you
+             * want to show case your app logo / company
+             */
+
+            @Override
+            public void run() {
+                onSplashOver();
+            }
+        }, SPLASH_TIME_OUT);
+
 
         com.facebook.accountkit.AccessToken accessToken = AccountKit.getCurrentAccessToken();
 
@@ -201,4 +224,10 @@ public class LoginPage extends AppCompatActivity {
         Toast.makeText(LoginPage.this, "Login success", Toast.LENGTH_LONG).show();
     }
 
-}
+    void onSplashOver()
+    {
+        ImageView spaceshipImage = (ImageView) findViewById(R.id.imgLogo);
+        Animation loginanimation = AnimationUtils.loadAnimation(this, R.anim.login_animation);
+        spaceshipImage.startAnimation(loginanimation);
+    }
+    }

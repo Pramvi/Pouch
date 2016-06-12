@@ -61,20 +61,13 @@ public class DisplayPage extends AppCompatActivity
         tabtwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_menu_send, 0, 0);
         tabLayout.getTabAt(1).setCustomView(tabtwo);
 
-        TextView tabthree = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-        tabthree.setText("Histroy");
-        tabthree.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_menu_gallery, 0, 0);
-        tabLayout.getTabAt(2).setCustomView(tabthree);
-
-
 
     }
 
     private void setupViewPager(ViewPager viewPager) {
         TabsPagerAdapter adapter = new TabsPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new HomeFragment(),"Features");
+        adapter.addFrag(new HomeFragment(),"Home");
         adapter.addFrag(new ProfileFragment(),"Profile");
-        adapter.addFrag(new ProfileFragment(),"Histroy");
         viewPager.setAdapter(adapter);
     }
 

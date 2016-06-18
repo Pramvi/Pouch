@@ -10,7 +10,15 @@ public class ContactModel extends RealmObject {
     @PrimaryKey
     int id;
 
-    String firstName,lastName,mobileNo,address,emailId,companyName,website;
+    String firstName,lastName,mobileNo,address,emailId,companyName,website,date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public String getWebsite() {
         return website;

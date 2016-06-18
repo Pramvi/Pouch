@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.pramvi.pouch.Model.ContactModel;
@@ -21,6 +22,7 @@ public class ContactActivity extends AppCompatActivity {
 
     private Realm realm;
     private RealmConfiguration realmConfig;
+    Button saveButton;
     String firstName,lastName,emailId,address,mobileNo,webSite,companyName;
     EditText firstNameView,lastNameView,mobileNoView,addressView,webSiteView,companyNameView,emailIdView;
 
@@ -36,22 +38,35 @@ public class ContactActivity extends AppCompatActivity {
         addressView=(EditText) findViewById(R.id.address);
         mobileNoView=(EditText) findViewById(R.id.mobile);
         emailIdView=(EditText) findViewById(R.id.emailid);
-        //webSiteView=(EditText) findViewById(R.id.we);
-        //companyNameView=(EditText) findViewById(R.id.firstname);
-
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        webSiteView=(EditText) findViewById(R.id.website);
+        companyNameView=(EditText) findViewById(R.id.company);
+        saveButton=(Button) findViewById(R.id.save);
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View v) {
+
+                firstName = firstNameView.getText().toString();
+                lastName=lastNameView.getText().toString();
+                address=addressView.getText().toString();
+                emailId=emailIdView.getText().toString();
+                mobileNo=mobileNoView.getText().toString();
+                companyName=companyNameView.getText().toString();
+                webSite=webSiteView.getText().toString();
+
+                ContactModel contactModel = new ContactModel();
+                contactModel.setFirstName(firstName);
+                contactModel.setLastName(lastName);
+                contactModel.setAddress(address);
+                contactModel.setEmailId(emailId);
+                contactModel.setMobileNo(mobileNo);
+                contactModel.setCompanyName(companyName);
+                contactModel.setWebsite(webSite);
+                save(contactModel);
             }
         });
     }
 
-    void save()
+    void save(final ContactModel contactModel)
     {
 
         realmConfig = new RealmConfiguration.Builder(this).build();
@@ -61,17 +76,8 @@ public class ContactActivity extends AppCompatActivity {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                // Add a person
-                ContactModel contactModel = realm.createObject(ContactModel.class);
-                contactModel.setFirstName(firstName);
-                contactModel.setLastName(lastName);
-                contactModel.setAddress(address);
-                contactModel.setEmailId(emailId);
-                contactModel.setMobileNo(mobileNo);
-                contactModel.setCompanyName(companyName);
-                contactModel.setWebsite(webSite);
-
-
+                // realm.copyToRealm(obj)
+                realm.copyToRealmOrUpdate(contactModel);
             }
         });
     }

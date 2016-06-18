@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.pramvi.pouch.Model.ContactModel;
 import com.pramvi.pouch.Utils.DialogUtils;
 
 import java.io.IOException;
@@ -27,11 +28,16 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Locale;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 public class MainActivity extends AppCompatActivity {
     NfcAdapter nfcAdapter;
     Context context;
     IntentFilter tagDetected;
     PendingIntent pi;
+    Realm realm;
+    RealmConfiguration realmConfig;
 
     NfcAdapter adapter;
     PendingIntent pendingIntent;
@@ -81,8 +87,7 @@ public class MainActivity extends AppCompatActivity {
         //EditText editTextWeb = (EditText)
         Log.v("MyApp", "create Record started");
 
-        String nameVcard = "BEGIN:VCARD" +"\n"+ "VERSION:2.1" +"\n" + "N:;" + "Abhishek" + "\n" +
-                "ORG: PlanAyala"+"\n"+ "TEL;HOME:6302421" +"\n"+ "END:VCARD";
+        String nameVcard = formatContact();
 
         byte[] uriField = nameVcard.getBytes(Charset.forName("US-ASCII"));
         byte[] payload = new byte[uriField.length + 1];              //add 1 for the URI Prefix
@@ -260,5 +265,30 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return false;
+    }
+
+    String formatContact()
+    {
+        realmConfig = new RealmConfiguration.Builder(this).build();
+        // Open the Realm for the UI thread.
+        realm = Realm.getInstance(realmConfig);
+        String contact="";
+        
+        ContactModel contactModel = realm.where(ContactModel.class).findFirst();
+        contact="BEGIN:VCARD"+
+                "VERSION:4.0"+
+                "N:"+contactModel.getLastName()+";"+contactModel.getFirstName()+";;;"+
+                "FN:"+contactModel.getFirstName()+contactModel.getLastName()+
+                "ORG:"+contactModel.getCompanyName()+
+                "TITLE:"+"Shrimp Man"+
+                "PHOTO;MEDIATYPE=image/gif:http://www.example.com/dir_photos/my_photo.gif"+
+                "TEL;TYPE=work,voice;VALUE=uri:tel:"+contactModel.getMobileNo()+
+                "ADR;TYPE=work;LABEL="+contactModel.getAddress()+
+                "EMAIL:"+contactModel.getEmailId()+
+                "REV:"+contactModel.getDate().toString()+
+                "END:VCARD";
+
+        return contact;
+
     }
 }

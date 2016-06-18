@@ -50,6 +50,17 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/profileicon"
+                android:layout_below="@id/textregister"
+                android:layout_marginTop="15dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/address"
+                android:layout_marginLeft="10dp"
+                />
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/LastNameWrapper"
                 android:layout_width="340dp"
@@ -94,10 +105,10 @@
                 android:layout_height="40dp"
                 android:id="@+id/emailidicon"
                 android:layout_below="@id/mobilewrapper"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="12dp"
                 android:layout_alignParentLeft="true"
                 android:src="@drawable/closeenvelope"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 />
 
 
@@ -121,14 +132,14 @@
             </android.support.design.widget.TextInputLayout>
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:id="@+id/addressicon"
                 android:layout_below="@id/emailidwrapper"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="12dp"
                 android:layout_alignParentLeft="true"
                 android:src="@drawable/address"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 />
 
             <android.support.design.widget.TextInputLayout
@@ -150,8 +161,47 @@
                 
             </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/websitewrapper"
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/addresswrapper"
+                android:layout_marginTop="4dp"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <EditText
+                    android:id="@+id/website"
+                    android:inputType="textPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Website" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/companywrapper"
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/websitewrapper"
+                android:layout_marginTop="4dp"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <EditText
+                    android:id="@+id/company"
+                    android:inputType="textPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Company Name" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
             <Button
-                android:id="@+id/register"
+                android:id="@+id/save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Save"
@@ -161,7 +211,7 @@
                 android:layout_centerHorizontal="true"
                 android:background="@color/md_brown_900"
                 android:layout_gravity="center_horizontal"
-                android:layout_below="@+id/addresswrapper"
+                android:layout_below="@+id/companywrapper"
                 android:layout_marginBottom="20dp"
                 />
 

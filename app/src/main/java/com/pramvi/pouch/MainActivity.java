@@ -273,7 +273,7 @@ public class MainActivity extends AppCompatActivity {
         // Open the Realm for the UI thread.
         realm = Realm.getInstance(realmConfig);
         String contact="";
-        
+
         ContactModel contactModel = realm.where(ContactModel.class).findFirst();
         contact="BEGIN:VCARD"+
                 "VERSION:4.0"+

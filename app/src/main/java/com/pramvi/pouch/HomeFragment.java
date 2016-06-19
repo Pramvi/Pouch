@@ -8,8 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.blunderer.materialdesignlibrary.views.CardView;
+
 
 public class HomeFragment extends Fragment {
+
+    private View.OnClickListener mOnNormalButtonClickListener;
+    private View.OnClickListener mOnHighlightButtonClickListener;
 
 
     public HomeFragment() {
@@ -24,4 +29,5 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
 }

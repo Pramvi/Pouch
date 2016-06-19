@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.blunderer.materialdesignlibrary.views.CardView;
 import com.pramvi.pouch.Utils.TabsPagerAdapter;
 
 public class DisplayPage extends AppCompatActivity

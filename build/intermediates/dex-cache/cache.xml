@@ -33,7 +33,7 @@
         jar="/home/mrsinghania/Git/Pouch/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         revision="23.0.2"
-        sha1="69a4e47b55680eef4b7a784d46672df8546e9d69">
+        sha1="70a7c6ccbab18df8447dbae9c6b72f02ce053113">
         <dex dex="/home/mrsinghania/Git/Pouch/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_6ebc09056f5ce1b0fa134cb6cbd8fb552edd1346/classes.dex" />
     </item>
     <item
@@ -187,7 +187,7 @@
         jar="/home/mrsinghania/Git/Pouch/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         revision="23.0.2"
-        sha1="66292d40842f1490c355c265617be7a726f11b88">
+        sha1="69ccd8ca3b1499d0b4f2f6e22bd45e3bb4489887">
         <dex dex="/home/mrsinghania/Git/Pouch/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_113181a8e942dadfffc796b11a58bd120481ee0b/classes.dex" />
     </item>
     <item

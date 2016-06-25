@@ -28,6 +28,7 @@
          <TextView
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
+             android:id="@+id/loginuserName"
              android:text="Abhishek Singhania"
              android:textSize="20dp"
              android:textColor="@color/md_brown_900"
@@ -65,6 +66,7 @@
                 android:textSize="18dp"
                 android:layout_margin="10dp"
                 android:textStyle="bold"
+                android:id="loginmobileNo"
                 android:layout_toRightOf="@+id/mobiletag"
                 />
             </RelativeLayout>
@@ -92,7 +94,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/emailid"
+                android:id="@+id/loginemailid"
                 android:text="abhisinghania14@gmail.com"
                 android:textSize="18dp"
                 android:layout_margin="10dp"
@@ -160,6 +162,7 @@
                 android:textSize="18dp"
                 android:layout_margin="10dp"
                 android:textStyle="bold"
+                android:id="@+id/loginwebsite"
                 android:layout_toRightOf="@+id/websitetag"
                 />
         </RelativeLayout>
@@ -188,7 +191,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Vishesh Home Hostel,"
-                android:id="@+id/address"
+                android:id="@+id/loginaddress"
                 android:textSize="18dp"
                 android:layout_margin="10dp"
                 android:textStyle="bold"

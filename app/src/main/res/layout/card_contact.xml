@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Abhishek"
+            android:textSize="20dp"
+            android:id="@+id/firstname"
+            android:textColor="@color/md_blue_900"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Singhania"
+            android:textSize="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/md_blue_900"
+            android:layout_toRightOf="@+id/firstname"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edcams"
+            android:textSize="20dp"
+            android:textColor="@color/md_blue_900"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_below="@+id/firstname"
+            android:id="@+id/companyName"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Android App Developer"
+            android:textSize="20dp"
+            android:textColor="@color/md_black_1000"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/companyProfile"
+            android:layout_below="@+id/companyName"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9643156229"
+            android:textSize="20dp"
+            android:textColor="@color/md_blue_900"
+            android:padding="10dp"
+            android:layout_alignParentRight="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="abhisinghania14@gmail.com"
+            android:textSize="20dp"
+            android:textColor="@color/md_blue_900"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/emailId"
+            android:layout_below="@+id/companyProfile"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="200-A Harjender nagar Kanpur"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/md_black_1000"
+            android:id="@+id/address"
+            android:layout_below="@+id/emailId"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="website Link"
+            android:textSize="20dp"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/md_blue_900"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/address"/>
+
+
+    </RelativeLayout>
+    </android.support.v7.widget.CardView>
